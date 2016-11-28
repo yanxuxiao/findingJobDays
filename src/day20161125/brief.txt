@@ -18,11 +18,13 @@ http://www.cnblogs.com/soaringEveryday/p/4418604.html
 >在软件设计中，使用代理模式的意图也很多，比如因为安全原因需要屏蔽客户端直接访问真实对象，或者在远程调用中需要使用代理类处理远程方法调用的技术细节 (如 RMI)，也可能为了提升系统性能，对真实对象进行封装，从而达到延迟加载的目的。
 
 ##Hibernate一级二级缓存
+一级缓存为session级别的缓存,二级缓存是sessionFactory的缓存,支持第三方实现.ehCache,osCache
 
 ##Hibernate与Mybatis的区别
 
 ##Mybatis实现一对一关系
-
+resultMap:
+嵌套查询:
 
 ##Hibernate中java对象的几种状态
 * 临时态(Transient)
@@ -30,6 +32,10 @@ http://www.cnblogs.com/soaringEveryday/p/4418604.html
 * 游离态(Detached)
 
 ##java内存模型
+工作内存 物理内存
+堆栈 新生代 老生代 持久代
+stop-and-copy
+mark-and-sweep
 
 ##Spring MVC 对异步请求的处理
 async-support开关
@@ -49,3 +55,26 @@ new runnable not runnable/blocked dead
 ##happens-before
 >多两项操作偏序关系的描述,与执行时间实际没有多大关系.可以通过volatile synchronized等来保证happens-before原则.
 >具有传递性if A happens-before B and B happens-before C then A happens-before C.
+
+##集合与Map
+
+###Collection 系列
+* Collection：它是一个根接口，JDK没有它的实现类,内部仅仅做 add()，remove()，contains()，size() 等方法的声明。
+* List：它继承于 Collection，增加了可以对每个元素插入的位置进行精确的控制的方法，另外，插入的值允许为空，也允许有重复的值。
+>实现类		实现方式	是否同步	是否支持插入空值	元素是否支持重复
+ArrayList	数组		不同步	支持			支持
+Vector		数组		同步		支持			支持
+LinkedList	链表		不同步	支持			支持
+
+###Map
+HashMap：最常用的 Map，非同步，不保证顺序。允许有空值和空键。 采用链表法解决哈希冲突，并且在发生哈希冲突的时候，新的 Node 会加入到链表的最下端；在 JDK8 中哈希冲突过多的情况下链表会变成红黑树从而保证效率；
+LinkedHashMap：继承HashMap，Iterator下 能保证插入的先后顺序，原理是在LinkedHashMap中加入了链表，并且该链表还是一个双向链表。
+ConcurrentHashMap：也是HashMap的线程安全版本，并且使用了分段加锁机制，所以效率上要比HashTable要好很多。
+TreeMap：能够根据 key 值来有序插入 (也就是键值对会根据key排序好)，原理使用了红黑树，每次插入都会对树进行调整。
+HashTable：HashMap的线程安全版本，内部的实现几乎和 HashMap 一模一样。但是由于其同步是使用了 synchronized，效率较低。
+
+参考:https://segmentfault.com/a/1190000005948183
+
+###红黑树
+http://www.cnblogs.com/skywang12345/p/3624343.html
+
