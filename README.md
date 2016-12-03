@@ -79,4 +79,7 @@ HashTable：HashMap的线程安全版本，内部的实现几乎和 HashMap 一�
 http://www.cnblogs.com/skywang12345/p/3624343.html
 
 ##单例模式
-懒汉 恶汉
+懒汉 饿汉
+
+参考:
+http://www.cnblogs.com/java-my-life/archive/2012/03/31/2425631.html
